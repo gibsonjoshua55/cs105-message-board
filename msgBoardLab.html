@@ -1,0 +1,263 @@
+<html><head><title>Lab 2 - COMP 105 Message Board</title>
+
+   <link rel="STYLESHEET" type="text/css" href="/cs105/styles.css"></head>
+<body>
+<script type="text/javascript" src="/cs105/labs/siteTitle.js"></script>
+
+<div id="pageTitle">
+<h1>Lab 2: COMP 105 Message Board</h1>
+</div>
+
+<p>&nbsp;</p>
+<hr>
+
+<p>
+<a name="introduction"></a>
+</p><h2>Introduction</h2>
+
+<p>
+The goal of this lab is to set up a message board where COMP 105
+students can post questions and comments.  This is not an application
+that can be handled with JavaScript alone, since JavaScript has no mechanism
+for saving shared data.  The functionality for the
+COMP 105 Message board will be divided into three pieces: a page on
+which users can
+enter messages (you will write this piece using JavaScript),
+a page on
+the CS server that adds new messages to the message board database,
+and a page that displays the current contents of the message board.  
+Fortunately for us, the pieces that add new messages to the board
+and display the current contents of the board have already been
+written.  All that's left to do is to design the Message Entry page.
+</p>
+
+
+
+<h4>Getting Started</h4>
+
+<p>
+The first step is to set up a new web page that will be used by visitors
+to post to the message board.  In addition to prompting the user for the
+message content, it should also gather some
+information about the user (to verify the each user is allowed to post to
+the board and to display a name on the board along with the message) and
+allow the user to specify how the message should be displayed (font
+color and whether or not to convert to all capital letters).
+The table below shows the types of fields (<em>i.e.,</em>
+form elements) you will need for your page.
+</p>
+
+<p>
+Start by creating a new page (e.g., "lab2.html" or "messageBoard.html")
+in your folder or project and then copying and pasting the page source
+from the <a
+href="http://www.cs.kzoo.edu/cs105/labs/MessageBoard/msgEntrySkeleton.html"
+target="_blank">Skeleton Message Board Entry page</a> into
+your page.  The skeleton includes a few sample HTML form elements that
+you will need on your page and also some extra, temporary code for
+testing your form elements as you create them.
+</p>
+
+<p> Read over the code that you have copied, and make sure you
+understand the various pieces of the code.  (At the end of the lab,
+once you have tested everything, you will comment-out the button
+that creates the intermediate test results.) As you saw in Mini-Lab
+#3, the <code>id</code> attribute in each input form element is
+used by the <code>label</code> tag.  Notice that each input form
+element has a <code>name</code> attribute that <strong>exactly</strong>
+matches one of the field names in the table below.  This is
+necessary in order for the page to interact correctly with the
+existing message board software on the CS server, which expects to
+receive information for fields with those specific names.
+The <code>value</code> attribute determines what value is
+passed to the server for the corresponding field name.   For example,
+if the existing skeleton code were to be submitted to the CS server,
+the data going to the server would consist of two name/value pairs:
+"posted_by"/"Alyce Brady" (if that was the value typed into the
+field) and "shout"/"yes".  </p>
+
+<h4>Adding Fields</h4>
+
+<p>
+Once you understand the copied code, you are ready to add new
+form elements to your page.
+<strong>(Recommendation:  add your elements one at a time, and test each
+one before going on to the next.)</strong>
+Give each field a label.
+Remember that the <code>name</code> attribute must <strong>exactly</strong>
+match the appropriate field name in the table below.
+Add appropriate code to the <code>showTestResults</code> function
+to test that your new input element acts as you expect.
+You can refer to this <a
+href="http://www.cs.kzoo.edu/cs105/resources/sampleFormPage.html"
+target="_blank">
+sample page of HTML form elements</a> for examples of HTML form elements
+that are not in the skeleton page.
+</p>
+
+<p>
+Use formatting instructions in HTML (e.g., line breaks, tables, etc) to
+give your page a nice layout (not in one long line, for example).
+Preview your page in a web browser to make sure that it looks OK and
+that all the input form elements have the expected values.
+</p>
+
+<table cellpadding="5" border="2"  style="width:80ex;">
+
+<tr>
+<th>Field Name</th> 
+<th style="text-align:left">Description</th>
+</tr>
+
+<tr>
+<td><code>message</code></td> 
+<td>The body of the message text.  This should be collected with a
+<code>textarea</code> element. </td>
+</tr>
+
+<tr>
+<td><code>topic</code></td> 
+<td> A title for the message.  This should be collected with a
+<code>text</code> input element.</td>
+</tr>
+
+<tr>
+<td><code>color </code></td> 
+<td>The font color to be used for the message post.  This should be
+collected with a <code>select</code> element that provides the user
+with several
+different colors to choose from. The value of this item needs to be a
+color identifier that HTML recognizes.  Here is
+a <a href="http://www.w3schools.com/html/html_colornames.asp"
+target="_bank"> list of recognized color names</a>.</td>
+</tr>
+
+<tr>
+<td><code>salutation </code></td> 
+<td>The preferred salutation of the poster (Ms., Mr., none, etc.).
+This should be collected with a set of <code>radio</code> buttons.</td>
+</tr>
+
+<tr>
+<td><code>posted_by</code></td> 
+<td>The name of the person posting the message.  This should be
+collected with a <code>text</code> input element.</td>
+</tr>
+
+<tr>
+<td><code>password</code></td> 
+<td> The password for the message board.  This should be collected with
+a <code>password</code> input element. (This field is not actually being
+used as a password, so you can type anything in when you are testing.)</td>
+</tr>
+
+<tr>
+<td><code>shout</code></td> 
+<td>A field that determines whether or not the message should be
+converted to upper case.  This should be collected with a
+<code>checkbox</code>.
+The value attribute of the checkbox should initially be set to "yes":
+<pre class="javascript">
+&lt;input type="checkbox" name="shout" id="shout" value="yes">
+</pre>
+ </td>
+</tr>
+</table>
+
+<br />
+
+<H4>Submitting the Message</H4> 
+<H5>Step 1</H5> 
+<p>
+The next step is to modify your <code>&lt;form&gt;</code> tag to
+include <code>action</code> and <code>method</code> attributes,
+as in the example below, and then to
+add a submit button to your form (right after your test results button,
+for example).
+Make sure that the new button is
+inside the form, just as your other form elements are.
+</p>
+
+<pre class="javascript">
+&lt;!-- MODIFY THE EXISTING FORM TAG TO LOOK LIKE THIS! -->
+&lt;form action="http://www.cs.kzoo.edu/cs105/labs/MessageBoard/testMsg.php" method="POST" >
+
+&lt;!-- YOUR EXISTING INPUT ELEMENTS ARE HERE! -->
+
+&lt;input type="submit" name="submit1" value="Submit">
+
+&lt;/form>
+
+</pre>
+
+<p>
+What is happening here?  The form tags serve to tie
+together all of the input elements that should be sent to the server
+when the "Submit" button is clicked.  (It is also possible to have multiple
+forms per page, each of which may be associated with a different
+action.)  The <code>action</code> attribute specifies
+what should be done with the form's data when the submit button is
+clicked.  In this case, it will be sent to a page
+named <code>testMsg.php</code> that will show you the data that was
+submitted.
+We won't worry about
+the <code>method</code> attribute.  It determines <em>how</em> the
+data is sent.
+</p>
+
+<H5>Step 2</H5> 
+<p>
+Once the data on the <code>testMsg.php</code> page is correct, you are
+ready to submit it to the actual message board set up for this lab.
+Just change the file associated with the <code>action</code> property
+from <code>testMsg.php</code> to <code>postMsg.php</code>.
+This will insert the data you submit into a database that the
+message board looks at.
+</p>
+
+<p>
+Once you have added the action to your form tag and the submit button
+to your page, you
+should be able to test the message system.  Load your page in a web
+browser and try to post a message.
+(Remember: this is a single message board for the whole class, so
+everyone will be able to see your message -- keep it appropriate for a
+general audience!)
+Try making several posts with
+different input settings to make sure that your page is working as it
+should.  Look at the output on the <code>postMsg.php</code> page,
+but also look at the actual
+<a href="http://www.cs.kzoo.edu/cs105/labs/MessageBoard/cs105messageboard.php">
+COMP 105 message board
+</a>.
+</p>
+
+<H4>Finishing Up</H4> 
+<p>
+Once you are satisfied that your page works correctly, remove or
+comment out the button that creates intermediate test results.
+</p>
+
+<p>
+Add a link from your course web page to your new message-posting page.
+You should also add a link to the message page
+itself: 
+<a
+    href="http://www.cs.kzoo.edu/cs105/labs/MessageBoard/cs105messageboard.php"><code>http://www.cs.kzoo.edu/cs105/labs/MessageBoard/cs105messageboard.php</code></a>.
+either from your course web page or from the page used to make the
+posts.  Add HTML comments to your newly created pages containing: 
+</p>
+<ul>
+<li>A description of the Lab: "Lab 2: Message Board".</li>
+<li>Today's date.</li>
+<li>The names of all group members. (If you worked in a group.)</li>
+</ul>
+<p>
+Publish your completed pages to the web server and test them to make
+sure that they still work as expected.
+</p>
+
+<hr />
+
+</body>
+</html>

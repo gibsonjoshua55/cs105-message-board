@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+    <title>Message Board Entry</title>
+</head>
+
+<body>
+<h1>Message Board Entry Page</h1>
+<h2>(under development!)</h2>
+
+<form>
+    <!-- EXAMPLE ELEMENTS FROM MINI-LAB -->
+
+    <label for="userName">Your Name:   </label>
+    <input type="text" name="posted_by" id="userName" size="30" />
+    <br />
+
+    <!--
+    <input type="radio" name="salutation" id='option1' value='Dr.' />Dr.<br />
+    <input type="radio" name="salutation" id='option2' value='Mr.' />Mr.<br />
+    <input type="radio" name="salutation" id='option3' value='Ms.' />Ms.<br />
+    -->
+
+    <label for="shout">Shout?   </label>
+    <input type="checkbox" name="shout" id="shout" value="yes" />
+    <br />
+
+    <!-- NEED ADDITIONAL INPUT ELEMENTS! -->
+
+    <!-- BUTTON BELOW (like one in Mini-Lab #3) IS FOR TESTING.
+         EVENTUALLY IT SHOULD BE A SUBMIT BUTTON INSTEAD. -->
+    <input type="button" name="submit" value="Submit Test"
+        onclick="showTestResults();" />
+</form>
+
+<hr />
+
+<h2 id='testResultsHeading'></h2>
+<p id="testResults"></p>
+
+<script>
+function showTestResults()
+{
+    var element;
+    var outputHeading = document.getElementById("testResultsHeading");
+    var outputParagraph = document.getElementById("testResults");
+
+    // Print heading
+    outputHeading.innerHTML = "Test Results";
+    outputParagraph.innerHTML = "";
+
+    // Print form element name/value pairs
+    element = document.getElementById("userName");
+    outputParagraph.innerHTML += element.name + ": " + element.value + "<br />";
+
+    element = document.getElementById("shout");
+    outputParagraph.innerHTML += element.name + ": " + element.value + "; ";
+    outputParagraph.innerHTML += "checked = " + element.checked + "<br />";
+
+    /*
+    element = document.getElementById("option1");
+    outputParagraph.innerHTML += element.name + ": " + element.value + "; ";
+    outputParagraph.innerHTML += "checked = " + element.checked + "<br />";
+
+    element = document.getElementById("option2");
+    outputParagraph.innerHTML += element.name + ": " + element.value + "; ";
+    outputParagraph.innerHTML += "checked = " + element.checked + "<br />";
+    */
+}
+</script>
+
+</body>
+</html>
