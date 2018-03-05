@@ -1,5 +1,5 @@
 # CS 105 Message Board
-This project is a redesign by Joshua Gibson of the server side portion of CS 105 **Lab 2: CS 105 Message Board** created by [Dr. Alyce Brady](http://www.cs.kzoo.edu/~abrady/).
+This project is a redesign by Joshua Gibson of the server side portion of the Kalamazoo College CS 105 **Lab 2: CS 105 Message Board** created by [Dr. Alyce Brady](http://www.cs.kzoo.edu/~abrady/).
 
 With the exception of the URLs the students will interact with, the student portion of the lab is unchanged.
 
@@ -29,6 +29,13 @@ The settings in the `.env` will be loaded by the server and used throughout the 
 The only change required, for the simplicity of dealing with the exchange of `POST` data, is to change the `name` column of the `messages` table to `posted_by`.  This way data from the `POST` request and the MySQL query can be rendered in the same way without having to change field names.
 
 ## Running the server
+
+Node.js must be installed on the server before running this project.  If Node is not installed, run the following commands to install the run time.
+
+```
+curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
+sudo apt-get install -y nodejs
+```
 
 Before running the server, the dependencies must be installed using the following command:
 
@@ -62,7 +69,27 @@ pm2 stop cs105MessageBoardServer
 
 ## Apache Configuration
 
-To access the project from the web behind an apache server, a reverse proxy must be created.  This configuration will vary depending on the configuration of your Apache server and how you want to URLs to appear for this project.
+To access the project from the web behind an apache server, a reverse proxy must be created.
+
+Before configuring the proxy, the some Apache modules must be enabled by using the following commands:
+
+```
+sudo a2enmod proxy
+sudo a2enmod proxy_http
+sudo /etc/init.d/apache2 restart
+```
+
+Once these modules are enabled, the reverse proxy can be set up by using the following Virtual Host:
+
+```
+<VirtualHost *:80>
+  ServerName cs105MessageBoard.cs.kzoo.edu
+  ProxyPreserveHost On
+  ProxyRequests Off
+  ProxyPass / http://localhost:8080/
+  ProxyPassReverse / http://localhost:8080/
+</VirtualHost>
+```
 
 ## Pages
 
