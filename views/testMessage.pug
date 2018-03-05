@@ -1,0 +1,29 @@
+// CS 105 Message Board
+//	 testMessage.pug
+//
+// This file will render the fields of the test post and will render how
+// the message would actually look on the message board
+
+
+include ./mixins.pug
+
+html
+	head
+		title Test Message
+		include ./bootstrap.pug
+	body
+		div(style="padding: 10px;")
+			h2 Feedback for Message Board Lab
+			div(class="rounded border bg-white" style="margin: 40px; padding: 10px" )
+				h5 The values passed for each of the expected names are:
+				div(style="margin: 20px;")
+					+messageFields(message)
+				h5 Message:
+				div(style="margin: 20px;")
+					+message(message)
+				p
+					| When this test page shows all the values you expect, you can change
+					| your form's action from <code>testMsg.php</code>
+					| to post to <code>postMsg.php</code>.
+					| Once you have done that, you will be able to
+					| see your messages on the CS 105 Message Board.

@@ -1,0 +1,24 @@
+// CS 105 Message Board
+//	 postMessage.pug
+//
+// This file will render a reponse to an actual posting of a message
+// If the post was successful, the message will be rendered
+// If the post was unsuccessful, the message fields will be rendered and an error message displayed
+
+
+include ./mixins.pug
+
+html
+	head
+		title Post Message
+		include ./bootstrap.pug
+	body
+		div(style="padding: 10px;")
+			if error
+				h3 Error posting the following message
+				div(style="margin: 20px;")
+					+messageFields(message)
+			else
+				h4 <a href="/cs105MessageBoard">Message Successfully Posted</a>
+				div(style="margin: 20px;")
+					+message(message)

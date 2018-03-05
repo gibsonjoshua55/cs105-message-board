@@ -1,0 +1,24 @@
+// CS 105 Message Board
+//	 showMessages.pug
+//
+// This file will render all of the messages given to it in a responsive
+// grid
+// If there is an error, no messages will be displayed and an error message will be rendered
+
+
+include ./mixins.pug
+
+html
+	head
+		title CS 105 Message Board
+		include ./bootstrap.pug
+	body
+		if error
+			h3 Error displaying messages
+		else
+			div(style="padding: 10px;")
+				h1 CS 105 Messages
+				.container
+					.row
+						each message in messages
+							+message(message)

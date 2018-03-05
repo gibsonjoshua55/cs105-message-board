@@ -1,0 +1,19 @@
+{
+  "name": "cs105-message-board",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node cs105MessageBoardServer.js"
+  },
+  "author": "Joshua Gibson",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.2",
+    "mysql": "^2.15.0",
+    "path": "^0.12.7",
+    "pug": "^2.0.0-rc.4"
+  }
+}

@@ -1,0 +1,49 @@
+// CS 105 Message Board
+//	 mixins.pug
+//
+// This file contains reusable html blocks called mixins in the pug language:
+// 	 Contained mixins:
+//		message
+//		messageFields
+
+
+
+//This mixin will render a message with the following fields of the parameter:
+//	salutation
+//	posted_by
+//	topic
+//	shout
+//	message
+//	color
+//	password
+mixin message(message)
+	-
+		var messageText = message.message;
+		if( message.shout === "yes")
+			messageText = message.message.toUpperCase()
+
+	.card(class="col-12 col-sm-6 col-md-4 col-lg-3" style="padding: 0px;")
+		.card-block(style="padding: 15px;")
+			h5(class="card-title")=message.topic
+			h6(class="card-subtitle mb-2 text-muted")= message.salutation + " " + message.posted_by
+			p(class="card-text" style=`color: ${message.color}`)=messageText
+		div(class="card-footer text-muted")= message.date_time
+
+
+//This mixin will show the values of the following fields of the parameter:
+//	salutation
+//	posted_by
+//	topic
+//	shout
+//	message
+//	color
+//	password
+mixin messageFields(message)
+	div(class="rounded border bg-light" style="padding-left:10px;")
+		p salutation: #{message.salutation} <br />
+			| posted_by: #{message.posted_by} <br />
+			| topic: #{message.topic} <br />
+			| shout: #{message.shout} <br />
+			| message: #{message.message} <br />
+			| color: <span style="color: #{message.color}">#{message.color} </span> <br />
+			| password: #{message.password}
