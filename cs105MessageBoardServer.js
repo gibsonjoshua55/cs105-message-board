@@ -18,7 +18,7 @@ const express = require('express');			//used to create web server
 const path = require('path');				//used to represent file paths
 const bodyParser = require('body-parser');  //used to process http request bodies
 
-const port = (process.env.PORT || 8080);    //if the port is not set, use port 8080
+const port = (process.env.PORT || 3000);    //if the port is not set, use port 8080
 
 //create the web server
 app = express();

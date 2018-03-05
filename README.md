@@ -86,8 +86,8 @@ Once these modules are enabled, the reverse proxy can be set up by using the fol
   ServerName cs105MessageBoard.cs.kzoo.edu
   ProxyPreserveHost On
   ProxyRequests Off
-  ProxyPass / http://localhost:8080/
-  ProxyPassReverse / http://localhost:8080/
+  ProxyPass / http://localhost:3000/
+  ProxyPassReverse / http://localhost:3000/
 </VirtualHost>
 ```
 
