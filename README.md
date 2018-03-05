@@ -67,7 +67,7 @@ To stop the server, run the following command:
 pm2 stop cs105MessageBoardServer
 ```
 
-## Apache Configuration
+## Apache Configuration for CS Server
 
 To access the project from the web behind an apache server, a reverse proxy must be created.
 
