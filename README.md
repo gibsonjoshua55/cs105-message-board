@@ -16,6 +16,7 @@ Next, fill out the following fields with the appropriate values for the server.
 
 | Field           | Value          |
 | :-------------- | :------------- |
+| USE_DB          | If not true, then dummy data is used in on the message board and posts are saved |
 | SECRET_PASSWORD | The password required to post |
 | DB_HOST         | The host of the MySQL server  |
 | DB_PORT         | The port of the MySQL server  |
